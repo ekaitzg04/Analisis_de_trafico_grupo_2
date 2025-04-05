@@ -2,14 +2,19 @@ name: Python CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, feature/GitHub-Actions ]
   pull_request:
     branches: [ main ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+
+    services:
+      sonarqube:
+        image: sonarqube:lts
+        ports:
+          - 9000:9000
 
     steps:
     - name: Checkout código fuente
@@ -28,3 +33,18 @@ jobs:
     - name: Ejecutar pruebas
       run: |
         python -m unittest discover -s . -p "test_*.py"
+
+    - name: Instalar SonarScanner
+      run: |
+        wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
+        unzip sonar-scanner-cli-4.8.0.2856-linux.zip -d $HOME
+        export PATH=$HOME/sonar-scanner-cli-4.8.0.2856-linux/bin:$PATH
+        sonar-scanner --version
+
+    - name: Ejecutar análisis de SonarQube
+      run: |
+        sonar-scanner \
+          -Dsonar.projectKey=my_project \
+          -Dsonar.sources=. \
+          -Dsonar.host.url=http://localhost:9000 \
+          -Dsonar.login=anonymous
