@@ -1,4 +1,4 @@
-name: Python CI
+name: Python CI with SonarCloud
 
 on:
   push:
@@ -10,18 +10,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      sonarqube:
-        image: sonarqube:lts
-        ports:
-          - 9000:9000
-        env:
-          SONAR_ES_BOOTSTRAP_CHECKS_DISABLE: true
-          SONAR_FORCE_AUTHENTICATION: "false"
-
     steps:
-    - name: Checkout código fuente
+    - name: Checkout código
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  # Obligatorio para SonarCloud
 
     - name: Configurar Python
       uses: actions/setup-python@v4
@@ -37,34 +30,16 @@ jobs:
       run: |
         python -m unittest discover -s . -p "test_*.py"
 
-    - name: Set up Java
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
+    - name: Configurar SonarCloud
+      uses: sonarsource/sonarcloud-github-action@v1.8
+      env:
+        SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Instalar SonarScanner
+    - name: Ejecutar análisis
       run: |
-        wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
-        unzip sonar-scanner-cli-5.0.1.3006-linux.zip -d $HOME
-        echo "$HOME/sonar-scanner-5.0.1.3006-linux/bin" >> $GITHUB_PATH
-
-    - name: Wait for SonarQube
-      run: |
-        for i in {1..20}; do
-          if curl -s http://localhost:9000/api/system/status | grep -q "UP"; then
-            echo "SonarQube is ready!"
-            break
-          fi
-          echo "Waiting for SonarQube to start..."
-          sleep 10
-        done
-
-    - name: Ejecutar análisis de SonarQube
-      run: |
-        sonar-scanner -X \
-          -Dsonar.projectKey=my_project \
+        sonar-scanner \
+          -Dsonar.projectKey=TU_ORGANIZACION_TU_PROYECTO \
+          -Dsonar.organization=TU_ORGANIZACION_SONAR \
           -Dsonar.sources=. \
-          -Dsonar.host.url=http://localhost:9000 \
-          -Dsonar.login=admin \
-          -Dsonar.password=admin
+          -Dsonar.python.version=3.10
