@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "zone": "salburua",
+        "value": 45.6,
+        "timestamp": "2025-04-05T12:00:00Z"
+    },
+    {
+        "id": 2,
+        "zone": "salburua",
+        "value": 55.2,
+        "timestamp": "2025-04-05T12:05:00Z"
+    },
+    {
+        "id": 3,
+        "zone": "salburua",
+        "value": 50.1,
+        "timestamp": "2025-04-05T12:10:00Z"
+    },
+    {
+        "id": 4,
+        "zone": "arriaga",
+        "value": 40.3,
+        "timestamp": "2025-04-05T12:00:00Z"
+    },
+    {
+        "id": 5,
+        "zone": "arriaga",
+        "value": 42.7,
+        "timestamp": "2025-04-05T12:05:00Z"
+    },
+    {
+        "id": 6,
+        "zone": "arriaga",
+        "value": 41.9,
+        "timestamp": "2025-04-05T12:10:00Z"
+    },
+    {
+        "id": 7,
+        "zone": "zaramaga",
+        "value": 60.2,
+        "timestamp": "2025-04-05T12:00:00Z"
+    },
+    {
+        "id": 8,
+        "zone": "zaramaga",
+        "value": 62.5,
+        "timestamp": "2025-04-05T12:05:00Z"
+    },
+    {
+        "id": 9,
+        "zone": "zaramaga",
+        "value": 61.0,
+        "timestamp": "2025-04-05T12:10:00Z"
+    }
+]
