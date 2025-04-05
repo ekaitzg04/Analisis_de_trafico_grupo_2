@@ -31,11 +31,10 @@ jobs:
     - name: Ejecutar análisis SonarCloud
       env:
         SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
-        JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.14-7/x64
       run: |
         sonar-scanner \
           -Dsonar.projectKey=ekaitzg04_Analisis_de_trafico_grupo_2 \
           -Dsonar.organization=ekaitzg04 \
           -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.java.jdkHome=$JAVA_HOME \
-          -Dsonar.sources=.
+          -Dsonar.sources=. \
+          -Dsonar.ci.forceCiDetection=true
