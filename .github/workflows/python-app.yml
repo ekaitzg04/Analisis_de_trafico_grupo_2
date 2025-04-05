@@ -39,7 +39,7 @@ jobs:
     - name: Ejecutar análisis
       run: |
         sonar-scanner \
-          -Dsonar.projectKey=TU_ORGANIZACION_TU_PROYECTO \
-          -Dsonar.organization=TU_ORGANIZACION_SONAR \
+          -Dsonar.projectKey=ekaitzg04_Analisis_de_trafico_grupo_2 \
+          -Dsonar.organization=ekaitzg04 \
           -Dsonar.sources=. \
           -Dsonar.python.version=3.10
