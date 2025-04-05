@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main, feature/GitHub-Actions ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, feature/GitHub-Actions ]
 
 jobs:
   build:
