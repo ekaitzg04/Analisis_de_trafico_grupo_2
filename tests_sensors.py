@@ -16,7 +16,7 @@ class SensorAPITestCase(unittest.TestCase):
         # Comprobamos que se devuelve una lista
         self.assertIsInstance(data, list)
         # Se asume que el JSON tiene al menos un registro
-        self.assertTrue(len(data) > 0)
+        self.assertGreater(len(data), 0)
 
     def test_get_sensor_data_by_zone_salburua(self):
         # Prueba para obtener datos de la zona "salburua"
