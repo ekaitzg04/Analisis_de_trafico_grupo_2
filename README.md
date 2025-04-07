@@ -57,7 +57,7 @@ Werkzeug==2.2.3
    Copia todos los archivos en un mismo directorio.
 
 2. **Instalar las dependencias**
-   Asegúrate de tener Python instalado y ejecuta:
+   Asegúrate de tener Python instalado y ejecuta lo siguiente utilizando Windows PowerShell:
    ```bash
    pip install -r requirements.txt
    ```
